@@ -1,9 +1,10 @@
 ---
+layout: post
+category: Linux
 title: Pixelbook install Ubuntu
-categories: Linux
-tags:
-	- Pixelbook
-	- Ubuntu
+tags: 
+  - Pixelbook
+  - Ubuntu
 ---
 
 1. Pixelbook关机状态按下`ESC+Refresh+Power`进入Developer模式,`Ctrl+D`进入系统
