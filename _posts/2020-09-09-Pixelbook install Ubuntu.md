@@ -7,6 +7,8 @@ tags:
   - Ubuntu
 ---
 
+#### 刷写SeaBIOS,安装UBUNTU
+
 1. Pixelbook关机状态按下`ESC+Refresh+Power`进入Developer模式,`Ctrl+D`进入系统
 
 2. 安装SeaBIOS,`CTRL+ALT+T`打开终端
@@ -24,6 +26,22 @@ tags:
 
    [Ubuntu releases](http://old-releases.ubuntu.com/releases/19.10/)
 
+   Ubuntu 19.10版本官方不再维护,安装完成后需要手动替换源地址
+   ```shell
+   sudo gedit /etc/apt/sources.list
+   #使用以下源替换sources.list内的全部内容
+   deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan main restricted universe multiverse
+   deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-security main restricted universe multiverse
+   deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-updates main restricted universe multiverse
+   deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-proposed main restricted universe multiverse
+   deb http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-backports main restricted universe multiverse
+   deb-src http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan main restricted universe multiverse
+   deb-src http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-security main restricted universe multiverse
+   deb-src http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-updates main restricted universe multiverse
+   deb-src http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-proposed main restricted universe multiverse
+   deb-src http://mirrors.ustc.edu.cn/ubuntu-old-releases/ubuntu/ eoan-backports main restricted universe multiverse
+   ```
+
 4. 安装工具
 
    ```shell
@@ -34,13 +52,26 @@ tags:
    git config --global user.email xxxx
    ```
 
+   如需切换python版本，使用如下命令
+   ```shell
+   #查看已有python版本
+   whereis python
+   #具体版本号根据whereis python查看
+   sudo update-alternatives  --install /usr/bin/python python /usr/bin/python2.7 1
+   sudo update-alternatives  --install /usr/bin/python python /usr/bin/python3.5 2
+   #列出已添加的python版本
+   sudo update-alternatives --list python
+   #切换版本
+   sudo update-alternatives --config python
+   ```
+
 5. 安装驱动
 
    ```shell
    #以下地址二选一即可
-   #源地址
+   #原始版本
    git clone https://github.com/yusefnapora/pixelbook-linux
-   #已解决大部分问题建议使用
+   #修改版(包替换为国内地址)
    git clone https://github.com/mxzeng/pixelbook-linux
    
    cd pixelbook-linux
@@ -56,7 +87,12 @@ tags:
 #https://askubuntu.com/questions/1061403/upside-down-mouse-cursor-and-inverted-position-on-ubuntu-18-04
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get remove iio-sensor-proxy
+#ubuntu20.04/20.10更新重启即正常
+#19.10版本使用命令翻转屏幕，待安装驱动后即可正常使用
+#inverted 上下翻转,normal 正常显示,left 向左旋转90度,right 向右旋转90度
+sudo xrandr -o inverted
+#依然不正常,尝试移除重力方向调节
+#sudo apt-get remove iio-sensor-proxy
 ```
 
 ```shell
