@@ -73,7 +73,7 @@ tags:
    git clone https://github.com/yusefnapora/pixelbook-linux
    #修改版(包替换为国内地址)
    git clone https://github.com/mxzeng/pixelbook-linux
-   
+
    cd pixelbook-linux
    ./run-ansible.sh
    #所有脚本执行完成后重启
