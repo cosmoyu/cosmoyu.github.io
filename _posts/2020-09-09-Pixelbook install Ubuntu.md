@@ -46,7 +46,7 @@ tags:
 
    ```shell
    sudo apt install -y git python ansible
-
+   
    #配置git
    git config --global user.name xxxx
    git config --global user.email xxxx
