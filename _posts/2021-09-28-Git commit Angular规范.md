@@ -3,8 +3,8 @@ layout: post
 category: Linux
 title: Git commit Angular规范
 tags: 
-  - Linux
   - Git
+  - Linux
 ---
 
 ### Commit message 的格式
