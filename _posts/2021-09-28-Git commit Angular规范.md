@@ -35,11 +35,13 @@ Header包含三个字段
   - chore: 构建过程或辅助工具的变动
   - revert: 回滚操作
     > 撤销以前的 commit，则必须以revert:开头，后面跟着被撤销 Commit 的 Header
+
     ```
     revert: feat(pencil): add 'graphiteWidth' option
 
     This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
     ```
+
     > Body部分的格式是固定的，必须写成`This reverts commit <hash>.`，其中的hash是被撤销 commit 的 SHA 标识符。
 - scope (可选) 说明commit影响的范围
 - subject (必须) commit简短描述，不超过50个字符(动词开头，使用第一人称现在时，首字母小写，结尾不加句号)
@@ -76,6 +78,7 @@ Footer部分只用于两种情况
 
 - 不兼容变动
   > 如果当前代码与上一个版本不兼容，则 Footer 部分以`BREAKING CHANGE`开头，后面是对变动的描述、以及变动理由和迁移方法。
+
   ```
   BREAKING CHANGE: isolate scope bindings definition has changed.
 
@@ -95,8 +98,10 @@ Footer部分只用于两种情况
 
     The removed `inject` wasn't generaly useful for directives so there should be no code using it.
   ```
+
 - 关闭Issue
   > 如果当前 commit 针对某个issue，那么可以在 Footer 部分关闭这个 issue
+
   ```shell
   # 关闭单个Issue
   Closes #234
@@ -104,7 +109,7 @@ Footer部分只用于两种情况
   Closes #123, #245, #992
   ```
 
-  ### 使用 commit template
+  ### 创建 commit template
 
   使用的[Linell编写的模板](https://gist.github.com/Linell/bd8100c4e04348c7966d)
 
@@ -113,15 +118,17 @@ Footer部分只用于两种情况
   git config --global commit.template ~/.git-commit-template.txt
   ```
 
-  手动创建模板
+  或手动创建模板
+
   ```shell
   touch ~/.git-commit-template.txt
   # 打开.git-commit-template.txt,写入以下内容
   # 保存后执行
   git config --global commit.template ~/.git-commit-template.txt
-  # 替换git commit编辑器为vim
-  git config --global core.editor vim
   ```
+
+  `.git-commit-template.txt`
+
   ```
   # Type(<scope>): <subject>
 
@@ -143,6 +150,18 @@ Footer部分只用于两种情况
   # Subject should use impertivite tone and say what you did.
   # The body should go into detail about changes made.
   # The footer should contain any JIRA (or other tool) issue references or actions.
+  ```
+
+
+  替换git commit编辑器为`vim`(默认为`nano`)
+
+  `git config --global core.editor vim`
+
+  ### 使用 commit template
+
+  ```
+  # 执行commit会自动打开模板
+  git commit
   ```
 
   ### 参考
